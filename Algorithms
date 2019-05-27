@@ -79,3 +79,20 @@ ggplot(data_cleaned, aes(School.Type)) +
     ylab('Salaries in $') +
     ggtitle('Mean starting and Mid-career median salaries') +
     coord_flip()
+
+# Correlation plot between tution fee_in ,starting salary and experienced career salary
+
+  data_iv <- data_cleaned[c(9,13,31)]
+  cor(data_iv)
+  corrplot(cor(data_iv))
+  symnum(cor(data_iv))
+  
+# Word cloud with Degree and mid career salary 
+
+library(wordcloud)  
+wordcloud(words = salary_degree$`major`, freq = salary_degree$`mid_car_slry` / 100, scale = c(1, 0.01)) 
+
+# ANOVA-test
+
+inference(x = data_cleaned$School.Type , y=data_cleaned$MD_EARN_WNE_P10 , est = "mean", type = "ht", 
+          alternative = "greater", method = "theoretical", conflevel = 0.95)
